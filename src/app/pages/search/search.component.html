@@ -12,7 +12,13 @@
                     <div class="col-md-3 d-flex align-items-center">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-bus-front"></i></span>
-                            <input type="text" class="form-control" placeholder="From" value="Nagpur">
+                            <select class="form-select" [(ngModel)]="searchObj.fromLocation" name="fromLocation"
+                                id="fromLocation">
+                                <option value="">Select From Location</option>
+                                @for(item of locations$ | async; track $index){
+                                <option [value]="item.locationId">{{item.locationName}}</option>
+                                }
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-1 text-center d-flex align-items-center justify-content-center">
@@ -21,17 +27,25 @@
                     <div class="col-md-3 d-flex align-items-center">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-bus-front"></i></span>
-                            <input type="text" class="form-control" placeholder="To" value="Pune">
+                            <select class="form-select" [(ngModel)]="searchObj.toLocation" name="toLocation"
+                                id="toLocation">
+                                <option value="">Select To Location</option>
+                                @for(item of locations$ | async; track $index){
+                                <option [value]="item.locationId">{{item.locationName}}</option>
+                                }
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-3 d-flex align-items-center">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-                            <input type="text" class="form-control" placeholder="Date" value="17 Aug 2024">
+                            <input type="date" class="form-control" [(ngModel)]="searchObj.travelDate" name="travelDate"
+                                placeholder="Date" value="17 Aug 2024">
                         </div>
                     </div>
                     <div class="col-md-2 text-center">
-                        <button type="submit" class="btn btn-light text-danger w-100">SEARCH BUSES</button>
+                        <button type="button" (click)="onSearch()" class="btn btn-light text-danger w-100">SEARCH
+                            BUSES</button>
                     </div>
                 </div>
             </form>
